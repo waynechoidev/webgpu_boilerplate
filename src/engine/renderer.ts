@@ -77,7 +77,7 @@ export default class Renderer {
     await this.setMatrix();
   }
 
-  public async render(time: number, delta: number) {
+  public async run(time: number, delta: number) {
     await this.writeBuffers(time, delta);
 
     this._commandEncoder = this._device.createCommandEncoder({
