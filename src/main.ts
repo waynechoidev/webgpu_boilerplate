@@ -1,10 +1,21 @@
-import Renderer from "./renderer";
+import Renderer from "@/engine/renderer";
 
 const renderer = new Renderer();
+let previousFrameTime = 0;
+
 async function main() {
   await renderer.initialize();
 
-  await renderer.render();
+  async function render() {
+    const time = performance.now();
+    const delta: number = time - previousFrameTime;
+    previousFrameTime = time;
+
+    await renderer.render(time, delta);
+    requestAnimationFrame(render);
+  }
+
+  render();
 }
 
 main();

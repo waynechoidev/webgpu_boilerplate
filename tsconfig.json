@@ -20,7 +20,13 @@
     "noFallthroughCasesInSwitch": true,
 
     /* Types */
-    "types": ["@webgpu/types", "vite-plugin-glsl/ext"]
+    "types": ["@webgpu/types", "vite-plugin-glsl/ext"],
+
+    /* Alias */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "include": ["src"]
 }
