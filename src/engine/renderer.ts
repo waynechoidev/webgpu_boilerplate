@@ -1,4 +1,4 @@
-import { getRandomFloat, toRadian, Vertex } from "@/engine/utils";
+import { toRadian } from "@/engine/utils";
 import main_vert from "@/shaders/main.vert.wgsl";
 import main_frag from "@/shaders/main.frag.wgsl";
 import { mat4, vec2, vec3 } from "gl-matrix";

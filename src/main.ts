@@ -12,6 +12,7 @@ async function main() {
     previousFrameTime = time;
 
     await renderer.run();
+    console.log(delta);
     requestAnimationFrame(render);
   }
 
