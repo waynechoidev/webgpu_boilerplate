@@ -40,8 +40,6 @@ export default class Renderer extends RendererBackend {
   private _camera!: Camera;
   private _projection!: mat4;
 
-  private _commandEncoder!: GPUCommandEncoder;
-
   private readonly NUM_OF_OBJECT: number;
 
   constructor() {
@@ -69,16 +67,13 @@ export default class Renderer extends RendererBackend {
   public async run(time: number, delta: number) {
     await this.writeBuffers(time, delta);
 
-    this._commandEncoder = this._device.createCommandEncoder({
-      label: "encoder",
-    });
+    await this.createEncoder();
 
     await this.compute();
 
     await this.draw();
 
-    const commandBuffer: GPUCommandBuffer = this._commandEncoder.finish();
-    this._device.queue.submit([commandBuffer]);
+    await this.submitCommandBuffer();
   }
 
   // private methods

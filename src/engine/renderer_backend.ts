@@ -3,6 +3,7 @@ import { generateMips, loadImageBitmap, Vertex } from "@/engine/utils";
 export default abstract class RendererBackend {
   protected _device!: GPUDevice;
   protected _canvasContext!: GPUCanvasContext;
+  protected _commandEncoder!: GPUCommandEncoder;
 
   protected readonly WIDTH: number;
   protected readonly HEIGHT: number;
@@ -224,5 +225,16 @@ export default abstract class RendererBackend {
     };
 
     return renderPassDescriptor;
+  }
+
+  protected async createEncoder() {
+    this._commandEncoder = this._device.createCommandEncoder({
+      label: "encoder",
+    });
+  }
+
+  protected async submitCommandBuffer() {
+    const commandBuffer: GPUCommandBuffer = this._commandEncoder.finish();
+    this._device.queue.submit([commandBuffer]);
   }
 }
