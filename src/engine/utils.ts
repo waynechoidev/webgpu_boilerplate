@@ -1,12 +1,7 @@
-import { vec2, vec3 } from "gl-matrix";
+import { vec3 } from "gl-matrix";
 
 export type Vertex = {
   position: vec3;
-  velocity: vec3;
-  color: vec3;
-  texCoord: vec2;
-  radius: number;
-  mass: number;
 };
 
 export async function loadImageBitmap(url: string) {

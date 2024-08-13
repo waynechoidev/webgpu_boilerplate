@@ -11,7 +11,7 @@ async function main() {
     const delta: number = time - previousFrameTime;
     previousFrameTime = time;
 
-    await renderer.run(time, delta);
+    await renderer.run();
     requestAnimationFrame(render);
   }
 

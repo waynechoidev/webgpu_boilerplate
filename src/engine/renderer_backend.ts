@@ -179,18 +179,8 @@ export default abstract class RendererBackend {
   public getVerticesData(vertices: Vertex[]) {
     const verticesData: number[] = [];
     for (let i = 0; i < vertices.length; i++) {
-      const { position, velocity, color, texCoord, radius, mass } = vertices[i];
-      verticesData.push(
-        ...position,
-        0,
-        ...velocity,
-        0,
-        ...color,
-        0,
-        ...texCoord,
-        radius,
-        mass
-      );
+      const { position } = vertices[i];
+      verticesData.push(...position);
     }
 
     return verticesData;

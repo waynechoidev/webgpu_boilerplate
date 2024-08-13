@@ -16,15 +16,17 @@ export default class Camera {
     position,
     center,
     up,
+    initialRotate,
   }: {
     position: vec3;
     center: vec3;
     up: vec3;
+    initialRotate: vec2;
   }) {
     this._position = position;
     this._center = center;
     this._up = up;
-    this._rotate = vec2.fromValues(0, 0);
+    this._rotate = initialRotate;
 
     this._isDragging = false;
     this._initialX = 0;
