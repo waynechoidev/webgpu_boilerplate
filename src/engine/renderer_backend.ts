@@ -8,13 +8,17 @@ export default abstract class RendererBackend {
   protected readonly WIDTH: number;
   protected readonly HEIGHT: number;
 
+  protected _previousFrameTime: number;
+
   constructor() {
     this.WIDTH = window.innerWidth;
     this.HEIGHT = window.innerHeight;
+
+    this._previousFrameTime = 0;
   }
 
   abstract initialize(): Promise<void>;
-  abstract run(time: number, delta: number): Promise<void>;
+  abstract run(): Promise<void>;
 
   protected async requestDevice() {
     const adapter: GPUAdapter | null = await navigator.gpu?.requestAdapter();
@@ -226,5 +230,13 @@ export default abstract class RendererBackend {
   protected async submitCommandBuffer() {
     const commandBuffer: GPUCommandBuffer = this._commandEncoder.finish();
     this._device.queue.submit([commandBuffer]);
+  }
+
+  protected getDelta() {
+    const time = performance.now();
+    const delta: number = time - this._previousFrameTime;
+    this._previousFrameTime = time;
+
+    return delta;
   }
 }

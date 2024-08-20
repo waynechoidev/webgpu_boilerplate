@@ -48,7 +48,7 @@ export default class Renderer extends RendererBackend {
 
     await this.createBindGroups();
 
-    await this.setMatrix();
+    this.setMatrix();
   }
 
   public async run() {
@@ -59,6 +59,8 @@ export default class Renderer extends RendererBackend {
     await this.draw();
 
     await this.submitCommandBuffer();
+
+    requestAnimationFrame(() => this.run());
   }
 
   private async createVertexBuffers() {
@@ -100,7 +102,7 @@ export default class Renderer extends RendererBackend {
     });
   }
 
-  private async setMatrix() {
+  private setMatrix() {
     this._model = mat4.create();
     mat4.translate(this._model, this._model, vec3.fromValues(0, 0, -4));
     mat4.rotateX(this._model, this._model, toRadian(25));
